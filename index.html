@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link href="style.css" rel="stylesheet" />
+  <script defer src="script.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <title>Things to do</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="control-panel">
+        <h1 id="control-panel-title">Control Panel</h1>
+        <div class="random-number-display"></div>
+        <button id="saveItems">Save</button>
+        <button id="removeItemsBtn">Remove Items</button>
+      </div>
+      <div class="things-to-do">
+        <h1 id="to-do-title">Things to Do</h1>
+        <button id="highlightBtn">Highlight Random</button>
+        <button id="shuffleItemsBtn">Shuffle</button>
+        <ol class="to-do-list" id="to-do-list"></ol>
+      </div>
+      <div class="user-input">
+        <h1 id="user-input-title">User Input</h1>
+        <input class="input" id="userInput" placeholder="input things to do" />
+        <p>Input items separated by comma.</p>
+        <button id="submitBtn">Submit tasks</button>
+      </div>
+    </div>
+    <footer>
+      <button id="debug">Debug</button>
+    </footer>
+  </body>
+</html>

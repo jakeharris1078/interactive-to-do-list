@@ -1,0 +1,106 @@
+body {
+  background-color: rgb(221, 220, 220);
+  text-align: center;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1rem;
+}
+
+button {
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 0px 50px 25px 50px;
+  padding: 7px;
+  font-size: 1rem;
+}
+
+.highlight {
+  background-color: yellow;
+}
+
+input {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1rem;
+  width: 250px;
+  height: 250px;
+  border-radius: 25px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+#user-input-title,
+#control-panel-title {
+  font-size: 24px;
+}
+
+#to-do-title {
+  text-decoration: underline;
+}
+
+li {
+  text-align: left;
+}
+
+ol {
+}
+
+.container {
+  padding-top: 50px;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.control-panel {
+  border: solid black 2px;
+  width: 30%;
+  padding-bottom: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+.removeBtn {
+  position: relative;
+  bottom: 25px;
+  left: 50px;
+  height: 2rem;
+  border: solid black 3px;
+  width: 2rem;
+  padding-bottom: 2rem;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}
+
+.removeBtn:hover {
+  background-color: white;
+  color: red;
+}
+
+.things-to-do {
+  border: solid black 2px;
+  width: 30%;
+  padding-bottom: 50px;
+}
+
+.user-input {
+  border: solid black 2px;
+  width: 30%;
+  padding-bottom: 50px;
+}
+
+footer {
+  padding-top: 100px;
+}
+
+#debug {
+  background-color: aqua;
+  font-size: 24px;
+  padding: 32px 120px;
+  border-radius: 25px;
+}
+
+#debug:hover {
+  color: white;
+  background-color: blueviolet;
+}
