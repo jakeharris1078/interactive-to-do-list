@@ -6,38 +6,55 @@ const removeItemsBtn = document.getElementById('removeItemsBtn');
 const highlightBtn = document.getElementById('highlightBtn');
 const shuffleBtn = document.getElementById('shuffleItemsBtn');
 const submitTasksBtn = document.getElementById('submitBtn');
+const removeBtns = document.getElementsByClassName('removeBtn');
 
 const userInput = document.getElementById('userInput');
 const toDoList = document.getElementById('to-do-list');
-
-let listItems = document.getElementsByClassName('list-item');
+let listItems;
 
 const darkMode = document.getElementById('dark-mode');
 
 /////////////////////FUNCTIONS
 
-//implement dark mode
+//dark mode
 darkMode.addEventListener('click', function () {
   document.querySelector('body').classList.toggle('dark-mode');
 });
 
-//separate user input into items by comma, push it to to-do list, clear input field
+//submit button - take tasks & display them to DOM
 submitTasksBtn.addEventListener('click', function () {
-  //clear default text if present
-  let defaultText = document.querySelector('.default');
-  if (defaultText) {
-    toDoList.innerHTML = '';
+  //hide remove buttons if any are present
+  if (document.getElementById('btn-0')) {
+    for (let i of removeBtns) {
+      i.classList.toggle('hidden');
+    }
   }
 
   let input = userInput.value;
-  input = input.split(',');
-  for (var i = input.length; i > 0; i--) {}
 
-  input.forEach((element) => {
-    let idNum = (i + 1, i++);
-    toDoList.innerHTML += `<li id="li-${idNum}" class="list-item">${element}</li> <button id="btn-${idNum}" class="removeBtn hidden">✕</button>`;
-  });
-  userInput.value = '';
+  //check that something was typed
+  if (input.length < 1) {
+    alert('Please enter something.');
+  } else {
+    //clear default text if present
+    let defaultText = document.querySelector('.default');
+    if (defaultText) {
+      toDoList.innerHTML = '';
+    }
+
+    //split tasks by comma
+    input = input.split(',');
+
+    //establish i
+    for (var i = input.length; i > 0; i--) {}
+
+    //add items to unordered tasks list
+    input.forEach((element) => {
+      let idNum = (i + 1, i++);
+      toDoList.innerHTML += `<li id="li-${idNum}" class="list-item">${element}</li> <button id="btn-${idNum}" class="removeBtn hidden">✕</button>`;
+    });
+    userInput.value = '';
+  }
 });
 
 //shuffle button - shuffle items in list
@@ -59,8 +76,7 @@ shuffleBtn.addEventListener('click', function () {
   });
 });
 
-//functionality for highlight button
-//get random index from listItems, add style to random index
+//highlight button - generate random index from listItems, add highlight style to random index
 highlightBtn.addEventListener('click', function () {
   let listItems2 = document.querySelectorAll('li');
 
@@ -76,7 +92,6 @@ highlightBtn.addEventListener('click', function () {
 
 //functionality for remove items button
 removeItemsBtn.addEventListener('click', function () {
-  let removeBtns = document.getElementsByClassName('removeBtn');
   listItems = document.getElementsByClassName('list-item');
 
   //show/hide remove buttons onclick
@@ -89,18 +104,15 @@ removeItemsBtn.addEventListener('click', function () {
     let removeButton = removeBtns[i];
     let listRemove = listItems[i];
 
-    removeButton.addEventListener(
-      'click',
-      function () {
-        removeButton.remove();
-        listRemove.remove();
-      },
-      false
-    );
+    removeButton.addEventListener('click', function () {
+      removeButton.remove();
+      listRemove.remove();
+    });
   }
 });
 
-//functionality for save button
+//creating a downloadable file
+//i don't know how or why this works
 function download(filename, text) {
   var element = document.createElement('a');
   element.setAttribute(
@@ -108,15 +120,10 @@ function download(filename, text) {
     'data:text/plain;charset=utf-8,' + encodeURIComponent(text)
   );
   element.setAttribute('download', filename);
-
-  element.style.display = 'none';
-  document.body.appendChild(element);
-
   element.click();
-
-  document.body.removeChild(element);
 }
 
+//put list-item textContent into array, then print that to file and download it to user device
 saveBtn.addEventListener('click', function () {
   listItems = document.getElementsByClassName('list-item');
 
@@ -124,11 +131,9 @@ saveBtn.addEventListener('click', function () {
   for (var i = 0; i < listItems.length; i++) {
     newList.push(listItems[i].textContent);
   }
-  download('test', newList);
+  download('tasks', newList);
 });
 
 ////////////////NOT YET IMPLEMENTED
-//bug fix - if list is 2+, generate remove buttons, then new tasks are added while remove buttons are present, remove buttons are not generated correctly according to the new content
-//need to refactor
 //ideally implement some save functionality other than manually downloading a txt file every time (localStorage?)
 //figure out how to get this as an app on the phone - web hosting
