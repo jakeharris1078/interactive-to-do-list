@@ -12,31 +12,28 @@
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
       rel="stylesheet"
     />
+    <nav><a href="#" id="dark-mode">✵ Dark mode ✵</a></nav>
     <title>Things to do</title>
   </head>
   <body>
-    <div class="container">
-      <div class="control-panel">
-        <h1 id="control-panel-title">Control Panel</h1>
-        <div class="random-number-display"></div>
-        <button id="saveItems">Save</button>
-        <button id="removeItemsBtn">Remove Items</button>
-      </div>
-      <div class="things-to-do">
-        <h1 id="to-do-title">Things to Do</h1>
-        <button id="highlightBtn">Highlight Random</button>
-        <button id="shuffleItemsBtn">Shuffle</button>
-        <ol class="to-do-list" id="to-do-list"></ol>
-      </div>
-      <div class="user-input">
-        <h1 id="user-input-title">User Input</h1>
-        <input class="input" id="userInput" placeholder="input things to do" />
-        <p>Input items separated by comma.</p>
-        <button id="submitBtn">Submit tasks</button>
-      </div>
+    <div class="things-to-do">
+      <h1 id="to-do-title">Things to Do</h1>
+      <button class="controlBtn" id="highlightBtn">Highlight Random</button>
+      <button class="controlBtn" id="shuffleItemsBtn">Shuffle</button>
+      <ol class="to-do-list" id="to-do-list">
+        <li class="default list-item" id="li-0">Input your tasks below</li>
+      </ol>
+      <button class="controlBtn" id="removeItemsBtn">Remove Items</button>
+      <button class="controlBtn" id="saveItems">Save</button>
     </div>
-    <footer>
-      <button id="debug">Debug</button>
-    </footer>
+    <div class="user-input">
+      <h1 id="user-input-title">User Input</h1>
+      <input
+        class="input"
+        id="userInput"
+        placeholder="input tasks to do, separated by commas"
+      />
+      <button id="submitBtn" class="controlBtn">Submit tasks</button>
+    </div>
   </body>
 </html>

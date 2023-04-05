@@ -10,28 +10,35 @@ const submitTasksBtn = document.getElementById('submitBtn');
 const userInput = document.getElementById('userInput');
 const toDoList = document.getElementById('to-do-list');
 
-const listItems = document.getElementsByClassName('list-item');
+let listItems = document.getElementsByClassName('list-item');
 
-let removeBtns = document.getElementsByClassName('removeBtn');
-
-const debugBtn = document.getElementById('debug');
+const darkMode = document.getElementById('dark-mode');
 
 /////////////////////FUNCTIONS
 
+//implement dark mode
+darkMode.addEventListener('click', function () {
+  document.querySelector('body').classList.toggle('dark-mode');
+});
+
 //separate user input into items by comma, push it to to-do list, clear input field
 submitTasksBtn.addEventListener('click', function () {
+  //clear default text if present
+  let defaultText = document.querySelector('.default');
+  if (defaultText) {
+    toDoList.innerHTML = '';
+  }
+
   let input = userInput.value;
   input = input.split(',');
   for (var i = input.length; i > 0; i--) {}
 
   input.forEach((element) => {
     let idNum = (i + 1, i++);
-    toDoList.innerHTML += `<li id="li-${idNum}" class="list-item">${element}</li> <button id="btn-${idNum}" class="removeBtn hidden">x</button>`;
+    toDoList.innerHTML += `<li id="li-${idNum}" class="list-item">${element}</li> <button id="btn-${idNum}" class="removeBtn hidden">✕</button>`;
   });
   userInput.value = '';
 });
-
-//test 1, test2, test 3, test4
 
 //shuffle button - shuffle items in list
 shuffleBtn.addEventListener('click', function () {
@@ -69,24 +76,59 @@ highlightBtn.addEventListener('click', function () {
 
 //functionality for remove items button
 removeItemsBtn.addEventListener('click', function () {
+  let removeBtns = document.getElementsByClassName('removeBtn');
+  listItems = document.getElementsByClassName('list-item');
+
   //show/hide remove buttons onclick
   for (let i of removeBtns) {
     i.classList.toggle('hidden');
   }
-});
 
-//test 1, test2, test 3, test4
+  //delete specified items on click
+  for (var i = 0; i < removeBtns.length; i++) {
+    let removeButton = removeBtns[i];
+    let listRemove = listItems[i];
 
-////////////////NOT YET IMPLEMENTED
-//remove item when adjacent rmvBtn clicked
-removeBtns.addEventListener('click', function () {
-  console.log(removeBtns);
+    removeButton.addEventListener(
+      'click',
+      function () {
+        removeButton.remove();
+        listRemove.remove();
+      },
+      false
+    );
+  }
 });
 
 //functionality for save button
-saveBtn.addEventListener('click', function () {});
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute(
+    'href',
+    'data:text/plain;charset=utf-8,' + encodeURIComponent(text)
+  );
+  element.setAttribute('download', filename);
 
-////////////////////DEBUG
-debugBtn.addEventListener('click', function () {
-  console.log(toDoList);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+saveBtn.addEventListener('click', function () {
+  listItems = document.getElementsByClassName('list-item');
+
+  let newList = [];
+  for (var i = 0; i < listItems.length; i++) {
+    newList.push(listItems[i].textContent);
+  }
+  download('test', newList);
 });
+
+////////////////NOT YET IMPLEMENTED
+//bug fix - if list is 2+, generate remove buttons, then new tasks are added while remove buttons are present, remove buttons are not generated correctly according to the new content
+//need to refactor
+//ideally implement some save functionality other than manually downloading a txt file every time (localStorage?)
+//figure out how to get this as an app on the phone - web hosting
